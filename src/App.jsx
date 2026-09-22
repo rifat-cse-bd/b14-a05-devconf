@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import Banner from "./components/Banner";
+import Technology from "./components/Technology";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       </header>
       <main className="w-11/12 mx-auto">
         <Banner></Banner>
+        <Technology></Technology>
       </main>
     </>
   );
