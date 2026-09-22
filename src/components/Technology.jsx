@@ -66,7 +66,10 @@ const Technology = () => {
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-            Explore the <span className="text-[#06b6d4]">Technologies</span>
+            Explore the{" "}
+            <span className="bg-linear-to-r from-[#EC4899] to-[#8B5CF6] bg-clip-text text-transparent">
+              Technologies
+            </span>
           </h1>
 
           <p className="mt-1 text-[9px] text-slate-500">
