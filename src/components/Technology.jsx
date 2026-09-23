@@ -78,9 +78,9 @@ const Technology = () => {
         </div>
 
         {/* Main Layout */}
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1fr_150px]">
-          {/* Technologies */}
-          <div>
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-4">
+          {/* Technologies - 3 columns */}
+          <div className="lg:col-span-3">
             {loading ? (
               <h1 className="text-sm text-slate-500">Loading...</h1>
             ) : error ? (
@@ -93,7 +93,7 @@ const Technology = () => {
                   <h1 className="text-sm text-slate-500">Loading...</h1>
                 }
               >
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {technologies.map((technology) => (
                     <TechnologyCard
                       key={technology.id}
@@ -106,7 +106,7 @@ const Technology = () => {
             )}
           </div>
 
-          {/* Your Stack */}
+          {/* Your Stack - 1 column */}
           <aside className="h-fit rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:sticky md:top-17">
             <h2 className="text-[10px] font-bold text-slate-900">Your Stack</h2>
 
