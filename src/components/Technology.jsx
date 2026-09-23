@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 import TechnologyCard from "./TechnologyCard";
+
 const Technology = () => {
   const [technologies, setTechnologies] = useState([]);
   const [stack, setStack] = useState([]);
@@ -99,6 +100,7 @@ const Technology = () => {
                       key={technology.id}
                       technology={technology}
                       onAdd={handleAddToStack}
+                      isAdded={stack.some((item) => item.id === technology.id)}
                     />
                   ))}
                 </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
-const TechnologyCard = ({ technology, onAdd }) => {
+const TechnologyCard = ({ technology, onAdd, isAdded }) => {
   const { name, category, description, icon, rating, difficulty, badge } =
     technology;
 
@@ -31,7 +31,12 @@ const TechnologyCard = ({ technology, onAdd }) => {
     badgeStyles[badge] || "border-slate-200 bg-slate-50 text-slate-500";
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md">
+    <div
+      className={`rounded-xl border bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md ${
+        isAdded ? "border-pink-500" : "border-slate-200"
+      }`}
+    >
+      {" "}
       {/* Top */}
       <div className="flex items-start justify-between gap-2">
         {/* Icon */}
@@ -46,18 +51,14 @@ const TechnologyCard = ({ technology, onAdd }) => {
           {badge}
         </span>
       </div>
-
       {/* Name */}
       <h2 className="mt-4 text-sm font-bold text-slate-900">{name}</h2>
-
       {/* Description */}
       <p className="mt-1.5 line-clamp-3 min-h-[48px] text-[8px] leading-[1.5] text-slate-500">
         {description}
       </p>
-
       {/* Divider */}
       <div className="my-3 border-t border-slate-100" />
-
       {/* Info */}
       <div className="flex items-center justify-between gap-1 text-[7px]">
         <span className="rounded bg-slate-100 px-2 py-1 font-medium text-slate-500">
@@ -71,13 +72,17 @@ const TechnologyCard = ({ technology, onAdd }) => {
           {rating}
         </span>
       </div>
-
       {/* Button */}
       <button
         onClick={() => onAdd(technology)}
-        className="mt-3 h-7 w-full rounded-md bg-[#080d1b] text-[8px] font-medium text-white transition hover:bg-slate-800"
+        disabled={isAdded}
+        className={`mt-3 h-7 w-full rounded-md border text-[8px] font-medium transition ${
+          isAdded
+            ? "cursor-not-allowed border-pink-200 bg-pink-50 text-pink-500"
+            : "border-transparent bg-[#080d1b] text-white hover:bg-slate-800"
+        }`}
       >
-        Add to Stack
+        {isAdded ? "Added to Stack" : "Add to Stack"}
       </button>
     </div>
   );
