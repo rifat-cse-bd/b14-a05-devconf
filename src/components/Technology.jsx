@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import TechnologyCard from "./TechnologyCard";
+import Loader from "./Loader";
 import { Bounce, toast } from "react-toastify";
 
 const Technology = () => {
@@ -132,7 +133,7 @@ const Technology = () => {
           {/* Technologies */}
           <div className="lg:col-span-3">
             {loading ? (
-              <h1 className="text-sm text-slate-500">Loading...</h1>
+              <Loader></Loader>
             ) : error ? (
               <div className="rounded-lg border border-red-100 bg-red-50 p-5 text-sm text-red-500">
                 {error}
