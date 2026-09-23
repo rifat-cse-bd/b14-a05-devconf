@@ -44,7 +44,6 @@ const Technology = () => {
     // Duplicate technology
     if (alreadyExists) {
       toast.error(`${technology.name} is already in your stack!`, {
-        toastId: `duplicate-${technology.id}`,
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -63,7 +62,6 @@ const Technology = () => {
     setStack((previousStack) => [...previousStack, technology]);
 
     toast.success(`${technology.name} added to your stack!`, {
-      toastId: `add-${technology.id}`,
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -83,7 +81,6 @@ const Technology = () => {
     setStack((previousStack) => previousStack.filter((item) => item.id !== id));
 
     toast.success(`${technology?.name} removed from your stack!`, {
-      toastId: `remove-${id}`,
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -101,7 +98,6 @@ const Technology = () => {
     setStack([]);
 
     toast.success("All technologies removed from your stack!", {
-      toastId: "remove-all",
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
