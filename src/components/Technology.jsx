@@ -1,7 +1,7 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
-
 import TechnologyCard from "./TechnologyCard";
+import { Bounce, toast } from "react-toastify";
 
 const Technology = () => {
   const [technologies, setTechnologies] = useState([]);
@@ -10,11 +10,12 @@ const Technology = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Fetch data from public/data.json
+  // Fetch technologies from public/data.json
   useEffect(() => {
     const loadTechnologies = async () => {
       try {
         setLoading(true);
+        setError("");
 
         const response = await fetch("/data.json");
 
@@ -26,7 +27,7 @@ const Technology = () => {
 
         setTechnologies(data);
       } catch (error) {
-        setError(error.message);
+        setError(error.message || "Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -37,28 +38,80 @@ const Technology = () => {
 
   // Add technology to stack
   const handleAddToStack = (technology) => {
-    setStack((previousStack) => {
-      // Prevent duplicates
-      const alreadyExists = previousStack.some(
-        (item) => item.id === technology.id,
-      );
+    const alreadyExists = stack.some((item) => item.id === technology.id);
+    console.log("Already exists:", alreadyExists);
 
-      if (alreadyExists) {
-        return previousStack;
-      }
+    // Duplicate technology
+    if (alreadyExists) {
+      toast.error(`${technology.name} is already in your stack!`, {
+        toastId: `duplicate-${technology.id}`,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
 
-      return [...previousStack, technology];
+      return;
+    }
+
+    // Add technology
+    setStack((previousStack) => [...previousStack, technology]);
+
+    toast.success(`${technology.name} added to your stack!`, {
+      toastId: `add-${technology.id}`,
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
     });
   };
 
   // Remove one technology
   const handleRemove = (id) => {
+    const technology = stack.find((item) => item.id === id);
+
     setStack((previousStack) => previousStack.filter((item) => item.id !== id));
+
+    toast.success(`${technology?.name} removed from your stack!`, {
+      toastId: `remove-${id}`,
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
 
   // Remove everything
   const handleRemoveAll = () => {
     setStack([]);
+
+    toast.success("All technologies removed from your stack!", {
+      toastId: "remove-all",
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   };
 
   return (
@@ -80,7 +133,7 @@ const Technology = () => {
 
         {/* Main Layout */}
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-4">
-          {/* Technologies - 3 columns */}
+          {/* Technologies */}
           <div className="lg:col-span-3">
             {loading ? (
               <h1 className="text-sm text-slate-500">Loading...</h1>
@@ -89,26 +142,20 @@ const Technology = () => {
                 {error}
               </div>
             ) : (
-              <Suspense
-                fallback={
-                  <h1 className="text-sm text-slate-500">Loading...</h1>
-                }
-              >
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {technologies.map((technology) => (
-                    <TechnologyCard
-                      key={technology.id}
-                      technology={technology}
-                      onAdd={handleAddToStack}
-                      isAdded={stack.some((item) => item.id === technology.id)}
-                    />
-                  ))}
-                </div>
-              </Suspense>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {technologies.map((technology) => (
+                  <TechnologyCard
+                    key={technology.id}
+                    technology={technology}
+                    onAdd={handleAddToStack}
+                    isAdded={stack.some((item) => item.id === technology.id)}
+                  />
+                ))}
+              </div>
             )}
           </div>
 
-          {/* Your Stack - 1 column */}
+          {/* Your Stack */}
           <aside className="h-fit rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:sticky md:top-17">
             <h2 className="text-[10px] font-bold text-slate-900">Your Stack</h2>
 
@@ -143,6 +190,7 @@ const Technology = () => {
                     </div>
 
                     <button
+                      type="button"
                       onClick={() => handleRemove(technology.id)}
                       className="text-slate-300 transition hover:text-red-500"
                       aria-label={`Remove ${technology.name}`}
@@ -157,6 +205,7 @@ const Technology = () => {
             {/* Remove All */}
             {stack.length > 0 && (
               <button
+                type="button"
                 onClick={handleRemoveAll}
                 className="mt-4 h-7 w-full rounded-md border border-red-200 text-[8px] font-medium text-red-400 transition hover:bg-red-50"
               >

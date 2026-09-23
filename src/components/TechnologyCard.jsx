@@ -75,10 +75,10 @@ const TechnologyCard = ({ technology, onAdd, isAdded }) => {
       {/* Button */}
       <button
         onClick={() => onAdd(technology)}
-        disabled={isAdded}
+        // disabled={isAdded}
         className={`mt-3 h-7 w-full rounded-md border text-[8px] font-medium transition ${
           isAdded
-            ? "cursor-not-allowed border-pink-200 bg-pink-50 text-pink-500"
+            ? "border-pink-200 bg-pink-50 text-pink-500"
             : "border-transparent bg-[#080d1b] text-white hover:bg-slate-800"
         }`}
       >
