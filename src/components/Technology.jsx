@@ -172,7 +172,7 @@ const Technology = () => {
                 stack.map((technology) => (
                   <div
                     key={technology.id}
-                    className="flex items-center justify-between rounded-md border border-slate-100 p-2"
+                    className="flex items-center justify-between rounded-md border border-slate-300 p-2"
                   >
                     <div className="flex min-w-0 items-center gap-2">
                       <img
@@ -189,7 +189,7 @@ const Technology = () => {
                     <button
                       type="button"
                       onClick={() => handleRemove(technology.id)}
-                      className="text-slate-300 transition hover:text-red-500"
+                      className="text-slate-500 transition hover:text-red-500"
                       aria-label={`Remove ${technology.name}`}
                     >
                       <X size={10} />
@@ -204,7 +204,7 @@ const Technology = () => {
               <button
                 type="button"
                 onClick={handleRemoveAll}
-                className="mt-4 h-7 w-full rounded-md border border-red-200 text-[8px] font-medium text-red-400 transition hover:bg-red-50"
+                className="mt-4 h-7 w-full rounded-md border border-red-300 text-[8px] font-medium text-red-400 transition hover:bg-red-50"
               >
                 Remove All
               </button>
