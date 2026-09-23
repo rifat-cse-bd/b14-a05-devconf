@@ -9,14 +9,14 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <>
-      <header className="w-11/12 mx-auto">
+      <header className="w-11/12 mx-auto sticky top-0 z-10">
         <NavBar></NavBar>
       </header>
       <main className="w-11/12 mx-auto">
         <Banner></Banner>
         <Technology></Technology>
       </main>
-      <section className="w-11/12 mx-auto border-t border-slate-100">
+      <section className="w-11/12 mx-auto border-t border-slate-100 mt-6">
         <Footer></Footer>
       </section>
     </>

@@ -61,8 +61,8 @@ const Technology = () => {
   };
 
   return (
-    <section className="min-h-screen bg-white px-6 py-6 sm:px-4">
-      <div className="mx-auto max-w-6xl">
+    <section className="min-h-screen bg-white px-6 pb-6 sm:px-4">
+      <div className="mx-auto">
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">
@@ -107,7 +107,7 @@ const Technology = () => {
           </div>
 
           {/* Your Stack */}
-          <aside className="h-fit rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <aside className="h-fit rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:sticky md:top-17">
             <h2 className="text-[10px] font-bold text-slate-900">Your Stack</h2>
 
             <p className="mt-1 text-[7px] text-slate-400">
