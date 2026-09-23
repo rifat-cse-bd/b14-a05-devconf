@@ -1,5 +1,6 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
+import { Check } from "lucide-react";
 
 const TechnologyCard = ({ technology, onAdd, isAdded }) => {
   const { name, category, description, icon, rating, difficulty, badge } =
